@@ -38,6 +38,10 @@ class Translate {
    */
   private $_automatic = true;
   
+  /**
+   * Locale buffer
+   * @var string
+   */
   private $_bufLocale = null;
 
   /**
@@ -242,16 +246,14 @@ class Translate {
    */
   private function _getBrowserLanguages() {
     
-    # check if environment variable HTTP_ACCEPT_LANGUAGE exists
+    // check if environment variable HTTP_ACCEPT_LANGUAGE exists
     if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-      # if not return an empty language array
       return array();
     }
 
-    # explode environment variable HTTP_ACCEPT_LANGUAGE at ,
     $browserLanguages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 
-    # convert the headers string to an array
+    // convert the headers string to an array
     $browserLanguagesSize = sizeof($browserLanguages);
     for ($i = 0; $i < $browserLanguagesSize; $i++) {
       # explode string at ;
@@ -262,7 +264,6 @@ class Translate {
         unset($browserLanguages[$i]);
     }
 
-    # remove the duplicates and return the browser languages
     return array_values(array_unique($browserLanguages));
   }
 
@@ -291,7 +292,6 @@ class Translate {
     }
 
     if (!is_array($data)) {
-      print_r($data);
       throw new Exception("Error including array or file '" . $data . "'");
     }
 
