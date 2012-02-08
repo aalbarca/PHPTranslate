@@ -129,6 +129,15 @@ class Translate {
 
     return $result;
   }
+  
+  /**
+   * Get Locale
+   * 
+   * @return array
+   */
+  public function getLocale() {
+    return $this->_locale;
+  }
 
   /**
    * Is the wished language available ?
