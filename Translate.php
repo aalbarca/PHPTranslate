@@ -121,11 +121,24 @@ class Translate {
 
     $list = array_keys($this->_translate);
     $result = null;
+
+    // Language list from translate table
     foreach ($list as $value) {
       if (!empty($this->_translate[$value])) {
         $result[$value] = $value;
       }
     }
+
+   // Language list from language directory
+   if ($handle = opendir(realpath(self::LANGUAGE_PATH))) {
+    while (false !== ($entry = readdir($handle))) {
+        if ($entry != "." && $entry != "..") {
+            $value = basename($entry, '.php');
+            $result[$value] = $value;
+        }
+    }
+    closedir($handle);
+   }
 
     return $result;
   }
